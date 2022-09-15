@@ -48,41 +48,49 @@ public class BoardController {
 	}
 
 	//로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginForm", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute signVO vo, HttpSession session) throws Exception {
-		System.out.println("/board/login POST방식 입니다.");
 		boolean result = service.loginChk(vo,session);
 		ModelAndView model = new ModelAndView();
 		
 		if(result) {
-			model.setViewName("board/listAll");
+			model.setViewName("/board/listAll");
 			model.addObject("msg","success");
+			model.addObject("boardList", service.listAll());
 		}else {
-			model.setViewName("board/login");
+			model.setViewName("/board/login");
 			model.addObject("msg", "fail");
 		}
 		return model; // listAll.jsp 이동
 	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void login(Model model) throws Exception {
 		System.out.println("로그인 get");
 //		model.addAttribute("boardList", service.listAll());
 	}
 
-		//회원가입
-		@RequestMapping(value = "/signUp", method = RequestMethod.POST)
-		public String signUp(signVO sign, RedirectAttributes rttr) throws Exception {
-			System.out.println("/board/signup POST방식 입니다.");
-			service.signUp(sign);
-			
-			return "redirect:/board/listAll"; // listAll.jsp 이동
-		}
-		
-		@RequestMapping(value = "/signUp", method = RequestMethod.GET)
-		public void signUp(Model model) throws Exception {
-			System.out.println("회원가입 get");
+	// 회원가입
+	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
+	public String signUp(signVO sign, RedirectAttributes rttr) throws Exception {
+		System.out.println("/board/signup POST방식 입니다.");
+		service.signUp(sign);
+
+		return "redirect:/board/listAll"; // listAll.jsp 이동
+	}
+
+	@RequestMapping(value = "/signUp", method = RequestMethod.GET)
+	public void signUp(Model model) throws Exception {
+		System.out.println("회원가입 get");
 //			model.addAttribute("boardList", service.listAll());
-		}
+	}
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public ModelAndView logout(HttpSession session) throws Exception {
+		System.out.println("로그아웃");
+		session.invalidate();
+		ModelAndView mv = new ModelAndView("redirect:/board/listAll");
+		return mv;
+	}
 	// 게시판 상세보기 뷰
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String detail(BoardVO boardVO, Model model) throws Exception {

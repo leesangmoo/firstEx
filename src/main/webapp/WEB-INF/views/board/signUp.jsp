@@ -62,29 +62,25 @@ function writeCheck()
 </header>
     <hr />
     <form name="writeform" action="/board/signUp" method="POST">
-        <div class="col-sm-12" style="left:750px";>
+        <div class="col-sm-12" style="width:60%; float:right;">
             <label style = "font-size:25px"; >아이디</label>
             <input type="text" class="form-control" name="id" 
             class="createForm" placeholder = "아이디" style="width:400px; font-size:20px;">
-        </div></br>
-        <div class="col-sm-12" style="left:750px";>
+        </br>
             <label style = "font-size:25px;">패스워드</label>
             <input type="password" name="pw" 
             class="form-control" placeholder = "패스워드"  style="width:400px; font-size:20px;">
-        </div></br>
-         <div class="col-sm-12" style="left:750px";>
+        </br>
             <label style = "font-size:25px";>이메일</label>
             <input type="email" name="email" 
             class="form-control" placeholder = "이메일"  style="width:400px; font-size:20px;">
-        </div></br>
-         <div class="col-sm-12" style="left:750px";>
+       </br>
             <label style = "font-size:25px";>핸드폰 번호</label>
             <input type="text" name="phone_number" 
             class="form-control" placeholder = "핸드폰 번호"  style="width:400px; font-size:20px;">
-        </div></br>
+        </br>
     </form>
-    <div class="col-sm-12" style="left:1000px";>
-                <button type="button" class="btn btn-success"  OnClick="writeCheck()">가입완료</button>
+                <button style="width:340px;" type="button" class="btn btn-success"  OnClick="writeCheck()">가입완료</button>
        			<input type=button class="btn btn-danger" value="취소" OnClick="javascript:history.back(-1)">	
         </div>      <!-- 버튼 타입 확인 2번 넘어갈 경우 있음 -->   
         </br>

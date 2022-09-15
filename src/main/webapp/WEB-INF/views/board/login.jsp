@@ -49,28 +49,25 @@ function writeCheck()
 	<p style="font-size:30px;color:white;">로그인<p>
 </header>
     <hr />
-    <form name="writeform" action="/board/login" method="POST">
-        <div class="col-sm-12" style="left:750px";>
+    <form name="writeform" action="/board/loginForm" method="POST">
+        <div class="col-sm-12" style="width:60%; float:right;">
             <label style = "font-size:25px"; >아이디</label>
             <input type="text" class="form-control" name="id" 
             class="createForm" placeholder = "아이디" style="width:400px; font-size:20px;">
-        </div></br>
-        <div class="col-sm-12" style="left:750px";>
+        </br>
             <label style = "font-size:25px";>패스워드</label>
             <input type="password" name="pw" 
             class="form-control" placeholder = "패스워드"  style="width:400px; font-size:20px;">
-        </div></br>
+        </br>
     </form>
-    <div class="col-sm-12" style="left:1010px";>
-                <button type="button" class="btn btn-success"  OnClick="writeCheck()">로그인</button>
+                <button style="width:340px;" type="button" class="btn btn-success"  OnClick="writeCheck()">로그인</button>
        			<input type=button class="btn btn-danger" value="취소" OnClick="javascript:history.back(-1)">	
-    </div>      <!-- 버튼 타입 확인 2번 넘어갈 경우 있음 -->   
-    </br>
-	<div class="col-sm-12" style="left:750px";>
+    </br></br>
      	<ul>	
 			<li><a>아이디 찾기 /</a></li>
      	   <li><a>비밀번호 찾기 /</a></li>
      		<li><a>회원가입 </a></li>
     	</ul>
+    </div>
 </body>
 </html>
