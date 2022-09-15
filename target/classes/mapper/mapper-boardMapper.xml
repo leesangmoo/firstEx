@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+<mapper namespace="com.lee.mapper.mapper-boardMapper">
+	
+	<!-- 회원가입 -->
+    <insert id="signUp">
+        insert into signup_table (id,pw,email,phone_number) values(#{id},#{pw},#{email},#{phone_number})
+    </insert> 
+ 	
+ 	<select id="login" resultType="String">
+ 		select * from signup_table
+ 		where id = #{id} and pw = #{pw}
+ 	</select>
+ 	
+    <!-- 게시판 추가하기 -->
+    <insert id="insertBoard">
+        insert into new_table (writer,title,content,now_date) values(#{writer},#{title},#{content},SYSDATE())
+ 
+    </insert>
+    
+    <!-- 게시판 리스트보기 -->
+    <select id="listBoard" resultType="BoardVO">
+    <![CDATA[
+        select * from new_table 
+        order by bno DESC
+    ]]>
+    </select>
+    
+    <!-- 게시판 상세보기 -->
+    <select id="detailBoard" resultType="BoardVO">
+            select * from new_table where bno = #{bno}
+    </select>
+ 
+    <!-- 게시판 삭제하기 -->
+    <delete id="deleteBoard">
+        delete from new_table where bno = #{bno}
+    </delete>
+    
+    <!-- 게시판 수정하기 -->
+    <update id="updateBoard">
+        update 
+        	new_table 
+        set 
+        	writer = #{writer}, 
+        	title = #{title}, 
+        	content = #{content} 
+        where 
+        	bno = #{bno}
+    </update>
+ <!--조회수 증가 -->
+    <update id="hit">
+        update 
+        	new_table 
+        set 
+        	hit = hit + 1 
+        where 
+        	bno = #{bno}
+    </update>
+
+</mapper>
