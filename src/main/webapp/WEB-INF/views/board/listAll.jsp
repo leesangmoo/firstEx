@@ -12,6 +12,21 @@
 <title>List</title>
 
 </head>
+<script language = "javascript"> // 자바 스크립트 시작
+
+function startSearch()
+  {
+   var form = document.searchform;
+   
+   if( !form.search.value )   // form 에 있는 name 값이 없을 때
+   {
+    alert( "MBTI 유형을 적어주세요" ); // 경고창 띄움
+    form.search.focus();   // form 에 있는 name 위치로 이동
+    return;
+   }
+  form.submit();
+  }
+ </script>
 <style type = "text/css">
 	header {
 		height : 100px;
@@ -99,9 +114,25 @@
 		</aside>
 	</div>
 <header>
-	<p style="font-size:30px;color:white;">작성 목록<p>
+	<p style="font-size:60px;color:white;"align = "center">Story By MBTI<p>
 </header>
 <hr />
+<form name="searchform" class="form-inline"> 
+ 	<div class="container-fluid row justify-content-center align-items-center">
+		<input type="text" id="search" name="search" class="form-control"
+             placeholder = "검색 EX)INFJ"  style="width:300px; font-size:20px;">  
+	 	<button type="submit" class="btn btn-primary" onclick="startSearch()">검색</button>
+	</div>
+</form>
+<!--             <div class="mx-quto input-group mt-5">
+                <mx-auto>
+                    <input name="query" type="text" class="form-control" placeholder="검색어 입력" aria-label="search" aria-describedby="button-addon2">
+                </mx-auto>
+
+                <button class="btn btn-success" type="submit" id="button-addon2">검색</button>
+
+            </div> -->
+	<br>
     <table class="table table-striped table-hover" border="1px" width="50%" align="center">
         <tr>
             <th style="width:5%">No.</th>
