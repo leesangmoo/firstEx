@@ -71,4 +71,11 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	@Override
+	public List<BoardVO> listAllAjax(BoardVO boardvo) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("servcie mbti" + boardvo.getMbti_type());
+		return dao.listAllAjax(boardvo);
+	}
+
 }

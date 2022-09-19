@@ -14,7 +14,12 @@ function writeCheck()
     form.writer.focus();   // form 에 있는 name 위치로 이동
     return;
    }
-   
+   if( !form.mbti_type.value )
+   {
+    alert( "MBTI를 적어주세요" );
+    form.mbti_type.focus();
+    return;
+   }
   if( !form.title.value )
    {
     alert( "제목을 적어주세요" );
@@ -54,6 +59,11 @@ function writeCheck()
             <label >작성자</label>
             <input type="text" class="form-control" name="writer" 
             class="createForm" placeholder = "작성자" style="width:800px; font-size:20px;">
+        </div>
+         <div class="col-sm-12" align="center">
+            <label >MBTI</label>
+            <input type="text" class="form-control" name="mbti_type" 
+            class="createForm" placeholder = "MBTI" style="width:800px; font-size:20px;">
         </div>
         <div class="col-sm-12" align="center">
             <label >제목</label>

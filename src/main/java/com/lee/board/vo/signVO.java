@@ -6,6 +6,7 @@ import java.util.Date;
 public class signVO {
 	private String id;
 	private String pw;
+	private String mbti_type;
 	private String email;
 	private String phone_number;
 
@@ -23,6 +24,14 @@ public class signVO {
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+
+	public String getMbti_type() {
+		return mbti_type;
+	}
+
+	public void setMbti_type(String mbti_type) {
+		this.mbti_type = mbti_type;
 	}
 
 	public String getEmail() {

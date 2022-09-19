@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class BoardVO {
 	private int bno;
+	private String mbti_type;
 	private String writer;
 	private String title;
 	private String content;
@@ -21,6 +22,12 @@ public class BoardVO {
 	}
 	public void setWriter(String writer) {
 		this.writer = writer;
+	}
+	public String getMbti_type() {
+		return mbti_type;
+	}
+	public void setMbti_type(String mbti_type) {
+		this.mbti_type = mbti_type;
 	}
 	public String getTitle() {
 		return title;

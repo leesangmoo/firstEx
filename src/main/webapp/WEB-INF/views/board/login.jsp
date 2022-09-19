@@ -49,7 +49,7 @@ function writeCheck()
 	<p style="font-size:30px;color:white;">로그인<p>
 </header>
     <hr />
-    <form name="writeform" action="/board/loginForm" method="POST">
+    <form name="writeform" action="/board/login" method="POST">
         <div class="col-sm-12" style="width:60%; float:right;">
             <label style = "font-size:25px"; >아이디</label>
             <input type="text" class="form-control" name="id" 

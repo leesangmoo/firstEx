@@ -74,4 +74,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return (name == null) ? false : true;
 	}
 
+	@Override
+	public List<BoardVO> listAllAjax(BoardVO boardvo) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("daoMbti" + boardvo.getMbti_type());
+		System.out.println(sqlSession.selectList(namespace + ".listAllAjax",boardvo).isEmpty());
+		return sqlSession.selectList(namespace + ".listAllAjax",boardvo);
+	}
+
 }

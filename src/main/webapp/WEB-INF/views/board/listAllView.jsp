@@ -69,49 +69,6 @@
 		});
 	});
 </script>
-<script language = "javascript"> // 자바 스크립트 시작
-function startSearch()
-  {
-   var form = document.searchform;
-   
-   if( !form.mbti_type.value )   // form 에 있는 name 값이 없을 때
-   {
-    alert( "MBTI 유형을 적어주세요" ); // 경고창 띄움
-    form.mbti_type.focus();   // form 에 있는 name 위치로 이동
-    return;
-   }
-   else{
-   	    $.ajax({
-			url : "/board/ajaxSearch",
-			type : "GET",
-			data : {"mbti_type" : $("#mbti_type").val() },
-			//data : $("form[name=searchform]").serialize(),
-			success : function(responseData){
-				//테이블 초기화
-				$('#tbody').empty();
-				if(responseData.length>=1){
-					responseData.forEach(function(item){
-						str='<tr>'
-						str += "<td>"+item.bno+"</td>";
-						str+="<td>"+item.writer+"</td>";
-						str+="<td>"+item.mbti_type+"</td>";
-						str+="<td>"+item.title+"</td>";
-						str+="<td>"+item.content+"</td>";
-						str+="<td>"+item.hit+"</td>";
-						str+="<td><a href = '/board/detail?bno=" + item.bno + "'>상세보기</a></td>";
-						str+="</tr>"
-						$('#tbody').append(str);
-	        		});				 
-				   }
-			     }
-			    }).fail(function(e){
-			    	alert("검색에 실패했습니다.");
-			    	form.mbti_type.focus();
-		  //form.submit();
-		});
-  	  }
-   }
-</script>
 <body>
 <div id="wrap">
 		<aside id="sidebar">
@@ -143,37 +100,38 @@ function startSearch()
 	<p style="font-size:60px;color:white;"align = "center">Story By MBTI<p>
 </header>
 <hr />
-<form name="searchform" class="form-inline" autocomplete="off"> 
- 	<div class="container-fluid row justify-content-center align-items-center">
-		<input type="text" id="mbti_type" name="mbti_type" class="form-control"
-             placeholder = "검색 EX)INFJ"  style="width:300px; font-size:20px;">  
-	 	<button type="button" id="searchbtn" class="btn btn-primary" onclick="startSearch()">검색</button>
-	</div>
-</form>
- <table  id="boardtable" class="table table-striped table-hover" border="1px" width="50%" align="center">
-        <tr>
-            <th style="width:5%">No.</th>
-			<th style="width:10%">작성자</th>
-			<th style="width:20%">MBTI</th>
-            <th style="width:20%">제목</th>
-            <th style="width:20%">내용</th>
-            <th style="width:5%">조회수</th>
-            <th style="width:10%">상세 보기</th>
-        </tr>
-        <tbody id="tbody">
-        
-        </tbody>
-    </table>
-<div id="container" style="width: 200px; height:10px; background-color:hidden;"></div>
 <!--             <div class="mx-quto input-group mt-5">
                 <mx-auto>
                     <input name="query" type="text" class="form-control" placeholder="검색어 입력" aria-label="search" aria-describedby="button-addon2">
                 </mx-auto>
                 <button class="btn btn-success" type="submit" id="button-addon2">검색</button>
             </div> -->
+	<br>
+    <table class="table table-striped table-hover" border="1px" width="50%" align="center">
+        <tr>
+            <th style="width:5%">No.</th>
+			<th style="width:10%">작성자</th>
+			 <th style="width:20%">MBTI</th>
+            <th style="width:20%">제목</th>
+            <th style="width:20%">내용</th>
+            <th style="width:17%">날짜</th>
+            <th style="width:5%">조회수</th>
+            <th style="width:10%">상세 보기</th>
+        </tr>
+    <c:forEach items="${boardList}" var="BoardVO">
+        <tr>
+            <td>${BoardVO.bno}</td>
+            <td>${BoardVO.writer}</td>
+            <td>${BoardVO.mbti_type}</td>
+            <td>${BoardVO.title}</a></td>
+            <td>${BoardVO.content}</td>
+            <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${BoardVO.now_date }" /> </td>
+            <td><span> ${BoardVO.hit}</span> </td>
+            <td><a href="/board/detail?bno=${BoardVO.bno}">상세보기</a></td>
+        </tr>
+    </c:forEach>
+    </table>
 <input type=button class="btn btn-success" style="width:80px; border-radius:0.5em; padding: 10px; float:right;
      margin-right: 1px;" value="글쓰기" OnClick="window.location='/board/create'"> 
-<input type=button class="btn btn-warning" style="width:80px; border-radius:0.5em; padding: 10px; float:right;
-     margin-right: 1px;" value="전체글" OnClick="window.location='/board/listAllView'"> 
 </body>
 </html>

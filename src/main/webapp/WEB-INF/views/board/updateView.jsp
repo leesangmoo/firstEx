@@ -39,6 +39,10 @@
 									<input type="text" class="form-control" id="writer" name="writer" style="width:800px; font-size:20px; text-align: center;" value="${update.writer}"/>
 						</div>
 						 <div class="col-sm-12" align="center">
+									<label for="mbti_type">MBTI</label>
+									<input type="text" class="form-control" id="mbti_type" name="mbti_type" style="width:800px; font-size:20px; text-align: center;" value="${update.mbti_type}"/>
+						</div>
+						 <div class="col-sm-12" align="center">
 									<label for="title">제목</label>
 									<input type="text" class="form-control" id="title" name="title" style="width:800px; font-size:20px; text-align: center;" value="${update.title}"/>
 							</div>

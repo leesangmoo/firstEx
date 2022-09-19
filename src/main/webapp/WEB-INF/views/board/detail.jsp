@@ -48,6 +48,10 @@
 									<td width="300px" align="center">작성자</td>
 									<td width="300px" align="center">${detail.writer}</td>
 						</tr>
+						<tr>						 
+									<td width="300px" align="center">MBTI</td>
+									<td width="300px" align="center">${detail.mbti_type}</td>
+						</tr>
 						 <tr>						 
 									<td width="300px" align="center">제목</td>
 									<td width="300px" align="center">${detail.title}</td>

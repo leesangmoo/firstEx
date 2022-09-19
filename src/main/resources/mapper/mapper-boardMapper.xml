@@ -9,7 +9,7 @@
 	
 	<!-- 회원가입 -->
     <insert id="signUp">
-        insert into signup_table (id,pw,email,phone_number) values(#{id},#{pw},#{email},#{phone_number})
+        insert into signup_table (id,pw,mbti_type,email,phone_number) values(#{id},#{pw},#{mbti_type},#{email},#{phone_number})
     </insert> 
  	
  	<select id="login" resultType="String">
@@ -19,7 +19,7 @@
  	
     <!-- 게시판 추가하기 -->
     <insert id="insertBoard">
-        insert into new_table (writer,title,content,now_date) values(#{writer},#{title},#{content},SYSDATE())
+        insert into new_table (writer,mbti_type,title,content,now_date) values(#{writer},#{mbti_type},#{title},#{content},SYSDATE())
  
     </insert>
     
@@ -29,6 +29,11 @@
         select * from new_table 
         order by bno DESC
     ]]>
+    </select>
+    
+    <select id="listAllAjax" parameterType="BoardVO" resultType="BoardVO">
+		select * from new_table
+		where mbti_type LIKE CONCAT('%', #{mbti_type},'%')							 
     </select>
     
     <!-- 게시판 상세보기 -->
@@ -47,6 +52,7 @@
         	new_table 
         set 
         	writer = #{writer}, 
+        	mbti_type = #{mbti_type},
         	title = #{title}, 
         	content = #{content} 
         where 

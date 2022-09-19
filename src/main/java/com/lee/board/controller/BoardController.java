@@ -1,6 +1,10 @@
 package com.lee.board.controller;
 
+
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -9,10 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.protobuf.Service;
 import com.lee.board.service.BoardService;
 import com.lee.board.vo.BoardVO;
 import com.lee.board.vo.signVO;
@@ -26,7 +30,7 @@ public class BoardController {
 
 	@Inject
 	private BoardService service;
-
+	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public void createGET(BoardVO board, Model model) throws Exception {
 		System.out.println(" /board/create 입니다. GET방식");
@@ -40,15 +44,51 @@ public class BoardController {
 
 		return "redirect:/board/listAll"; // listAll.jsp 이동
 	}
-
+	@RequestMapping(value = "/listAllView", method = RequestMethod.GET)
+	public void listAllView(Model model) throws Exception {
+		System.out.println("전체 목록 페이지");
+		model.addAttribute("boardList", service.listAll());
+	}
+	
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public void listAll(Model model) throws Exception {
 		System.out.println("전체 목록 페이지");
 		model.addAttribute("boardList", service.listAll());
 	}
-
+	
+	
+	@RequestMapping(value= "/ajaxSearch", method=RequestMethod.GET)
+	@ResponseBody
+	public List<BoardVO> ajaxSearch(@RequestParam("mbti_type") String mbti_type, 
+		 BoardVO boardVO, Model model) throws Exception {
+		    System.out.println("ajax 컨트롤러" + mbti_type);
+		    
+		    BoardVO boardvo = new BoardVO();
+		    boardvo.setMbti_type(mbti_type); //keyword
+		    System.out.println(service.listAllAjax(boardvo));
+		    return service.listAllAjax(boardvo);
+	}	    
+//		    BoardVO list = service.read(mbtiType);
+//		    
+//		    String listJson;
+//		    System.out.println("ajax" + list.getBno());
+//		    if(list != null) {
+//		    	 System.out.println("ajax if" );
+//		    	listJson = "{\"id\":\""+list.getBno()
+//		    					+"\",\"writer\":\""+list.getWriter()
+//		    					+"\",\"title\":\""+list.getTitle()
+//		    					+"\",\"content\":\""+list.getContent()
+//		    					+"\",\"date\":\""+list.getNow_date()
+//								+"\",\"hit\":\""+list.getHit()+"\"}";
+//		    }else {
+//		    	System.out.println("null");
+//		    	listJson = "null";
+//		    }
+//		    response.getWriter().print(listJson);
+//	}
+	
 	//로그인
-	@RequestMapping(value = "/loginForm", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute signVO vo, HttpSession session) throws Exception {
 		boolean result = service.loginChk(vo,session);
 		ModelAndView model = new ModelAndView();

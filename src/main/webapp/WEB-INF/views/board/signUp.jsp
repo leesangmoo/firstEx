@@ -21,6 +21,12 @@ function writeCheck()
     form.pw.focus();
     return;
    }
+  if( !form.mbti_type.value )
+  {
+   alert( "MBTI를 적어주세요" );
+   form.mbti_type.focus();
+   return;
+  }
   if( !form.email.value )
   {
    alert( "이메일을 적어주세요" );
@@ -71,10 +77,14 @@ function writeCheck()
             <input type="password" name="pw" 
             class="form-control" placeholder = "패스워드"  style="width:400px; font-size:20px;">
         </br>
+         	<label style = "font-size:25px";>MBTI</label>
+            <input type="text" name="mbti_type" 
+            class="form-control" placeholder = "MBTI"  style="width:400px; font-size:20px;">
+       	</br>
             <label style = "font-size:25px";>이메일</label>
             <input type="email" name="email" 
             class="form-control" placeholder = "이메일"  style="width:400px; font-size:20px;">
-       </br>
+         </br>
             <label style = "font-size:25px";>핸드폰 번호</label>
             <input type="text" name="phone_number" 
             class="form-control" placeholder = "핸드폰 번호"  style="width:400px; font-size:20px;">

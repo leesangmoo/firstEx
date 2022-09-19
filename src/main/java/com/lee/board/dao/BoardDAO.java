@@ -16,6 +16,8 @@ public interface BoardDAO {
 	
 	public List<BoardVO> listAll() throws Exception;
 
+	public List<BoardVO> listAllAjax(BoardVO boardvo) throws Exception;
+	
 	public BoardVO read(Integer bno) throws Exception;
 
 	public void delete(Integer bno) throws Exception;

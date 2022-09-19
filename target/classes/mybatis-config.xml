@@ -6,6 +6,7 @@
  
         <typeAliases>
             <typeAlias type="com.lee.board.vo.BoardVO" alias="BoardVO"/>
+            <typeAlias type="com.lee.board.vo.signVO" alias="signVO"/>
         </typeAliases>
 
 
