@@ -25,7 +25,7 @@ import com.lee.board.vo.signVO;
 @RequestMapping("/board/")
 // url요청이 /board/로 시작하는 것은 여기서 처리한다. 
 //ex)board/abc , board/123 board/create
-
+ 
 public class BoardController {
 
 	@Inject

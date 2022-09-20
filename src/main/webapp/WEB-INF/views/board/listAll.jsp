@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="true" %>
-
+<script src="https://kit.fontawesome.com/efbc78230f.js" crossorigin="anonymous"></script>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -112,10 +112,42 @@ function startSearch()
   	  }
    }
 </script>
+ <script type="text/javascript">
+
+ $(document).ready(function() {
+      let weatherIcon = {
+        '01' : 'fas fa-sun',
+        '02' : 'fas fa-cloud-sun',
+        '03' : 'fas fa-cloud',
+        '04' : 'fas fa-cloud-meatball',
+        '09' : 'fas fa-cloud-sun-rain',
+        '10' : 'fas fa-cloud-showers-heavy',
+        '11' : 'fas fa-poo-storm',
+        '13' : 'far fa-snowflake',
+        '50' : 'fas fa-smog'
+      };
+
+   $.ajax({
+    url:'http://api.openweathermap.org/data/2.5/weather?q=seoul&APPID=b22edd39d0f3ed394d569a629f6e1081&units=metric',
+    dataType:'json',
+    type:'GET',
+    success:function(data){
+       var $Icon = (data.weather[0].icon).substr(0,2);
+       var $Temp = Math.floor(data.main.temp) + 'º';
+       var $city = data.name;
+
+       $('.CurrIcon').append('<i class="' + weatherIcon[$Icon] +'"></i>');
+       $('.CurrTemp').prepend($Temp);
+       $('.City').append($city);
+      }
+     })
+    });
+  </script>
+
 <body>
 <div id="wrap">
 		<aside id="sidebar">
-			<li style= "color:white;">Side Menu</li>
+			<li style= "color:white;">what is your mbti</li>
 	<c:choose>
 		<c:when test="${msg == fail}">
 			<ul>
@@ -123,7 +155,13 @@ function startSearch()
 				<button type = "button" class="btn_t1 btn-success" OnClick="window.location='/board/signUp'">회원가입</button>
 				<br/>	<br/>	<br/>	<br/>
 				<li style= "color:white;">공지사항</li>	</br>
-				<li style= "color:white;">시스템 문의</li>
+				<li style= "color:white;">시스템 문의</li>  </br>
+				<li style= "color:yellow;">현재 날씨</li>
+			 <div class="weather">
+      			<div class="CurrIcon" style="color:yellow"></div>
+      			<div class="CurrTemp" style="color:yellow"></div>
+      			<div class="City" style="color:yellow"></div>
+			 </div>
 			</ul>
 		</c:when>
 		<c:otherwise>
@@ -133,6 +171,11 @@ function startSearch()
 				<br/>	<br/>	<br/>	<br/>
 				<li style= "color:white;">공지사항</li>	</br>
 				<li style= "color:white;">시스템 문의</li>
+				<div class="weather">
+      			<div class="CurrIcon" style="color:yellow"></div>
+      			<div class="CurrTemp" style="color:yellow"></div>
+      			<div class="City" style="color:yellow"></div>
+			 </div>
 			</ul>
 		</c:otherwise>
 	</c:choose>			
@@ -150,6 +193,7 @@ function startSearch()
 	 	<button type="button" id="searchbtn" class="btn btn-primary" onclick="startSearch()">검색</button>
 	</div>
 </form>
+<br>
  <table  id="boardtable" class="table table-striped table-hover" border="1px" width="50%" align="center">
         <tr>
             <th style="width:5%">No.</th>
